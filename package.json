@@ -27,6 +27,7 @@
     "react-dom": "^16.4.2"
   },
   "dependencies": {
+    "@types/enzyme": "^3.10.10",
     "@types/jest": "^23.3.13",
     "prop-types": "^15.8.0",
     "react": "^16.4.2"
