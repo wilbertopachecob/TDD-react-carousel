@@ -2,12 +2,30 @@ import React from 'react';
 import Carousel from '../components/Carousel';
 import { shallow } from 'enzyme';
 import CarouselButton from '../components/CarouselButton';
+import CarouselSlide from '../components/CarouselSlide';
 
 describe('CarouselBurton', () => {
   let wrapper;
+  const slides = [
+    {
+      imgUrl: 'https://example.com/slide1.png',
+      description: 'Slide 1',
+      attribution: 'Uno Pizzeria',
+    },
+    {
+      imgUrl: 'https://example.com/slide2.png',
+      description: 'Slide 2',
+      attribution: 'Dos Equis',
+    },
+    {
+      imgUrl: 'https://example.com/slide3.png',
+      description: 'Slide 3',
+      attribution: 'Three Amigos',
+    },
+  ];
 
   beforeEach(() => {
-    wrapper = shallow(<Carousel></Carousel>);
+    wrapper = shallow(<Carousel slides={slides}></Carousel>);
   });
 
   it('should display a button', () => {
@@ -37,5 +55,11 @@ describe('CarouselBurton', () => {
     wrapper.setState({ slideIndex: 1 });
     wrapper.find("[data-action='prev']").simulate('click');
     expect(wrapper.state('slideIndex')).toBe(0);
+  });
+
+  it('should show the fist image in the array after loaded', () => {
+    const firstSlide = slides[0];
+    const slideProps = wrapper.find(CarouselSlide).props();
+    expect(slideProps).toEqual(firstSlide);
   });
 });
