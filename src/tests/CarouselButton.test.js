@@ -1,9 +1,6 @@
 import React from 'react';
 import CarouselButton from '../components/CarouselButton';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+import { shallow } from 'enzyme';
 
 describe('CarouselBurton', () => {
   let wrapper;
@@ -18,5 +15,15 @@ describe('CarouselBurton', () => {
 
   it('passes children to button', () => {
     expect(wrapper.prop('children')).toBe(text);
+  });
+
+  it('passes other props to button', () => {
+    const onClick = () => {};
+    const className = 'btn btn-primary';
+    const dataAction = 'prev';
+    wrapper.setProps({ onClick, className, 'data-action': dataAction });
+    expect(wrapper.prop('onClick')).toBe(onClick);
+    expect(wrapper.prop('className')).toBe(className);
+    expect(wrapper.prop('data-action')).toBe(dataAction);
   });
 });
