@@ -48,10 +48,22 @@ describe('CarouselSlide', () => {
   });
 
   describe('Img', () => {
+    let mounted;
     const Img = CarouselSlide.defaultProps.Img;
     const imgUrl = 'https://example.com/slide1.png';
-    const mounted = mount(<Img src={imgUrl} />);
+    
+    beforeEach(() => {
+      mounted = mount(<Img src={imgUrl} />);
+    });
 
-    expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true)
+    it('should display the img with the right src attr', () => {
+      expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true)
+    });
+
+    it('should display the img with the right properties', () => {
+      expect(mounted).toHaveStyleRule('width', '100%');
+    });
+
+    
   })
 });
