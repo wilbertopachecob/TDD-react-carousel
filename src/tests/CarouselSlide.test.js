@@ -1,6 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import CarouselSlide from '../components/CarouselSlide';
 import React from 'react';
+import styled from 'styled-components';
 
 describe('CarouselSlide', () => {
   let wrapper;
@@ -69,5 +70,15 @@ describe('CarouselSlide', () => {
       mounted.setProps({imgHeight: 'calc(100vh - 100px)'});
       expect(mounted).toHaveStyleRule('height', 'calc(100vh - 100px)');
     });
+
+    it('should override default styles', () => { 
+      const newImg = styled(CarouselSlide.defaultProps.Img)`
+        width: 80%;
+      `;
+      wrapper = mount(<CarouselSlide imgUrl={imgUrl} Img={newImg} />);
+      expect(wrapper.find(newImg)).toHaveStyleRule('width', '80%');
+    });
+
+
   })
 });
