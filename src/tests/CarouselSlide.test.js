@@ -11,6 +11,14 @@ describe('CarouselSlide', () => {
     wrapper = shallow(<CarouselSlide imgUrl={imgUrl} />);
   });
 
+  it('renders correctly', () => {
+    wrapper.setProps({
+      attribution: 'Attribution',
+      description: 'Description',
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render proper element', () => {
     expect(wrapper.type()).toBe('figure');
   });
@@ -52,33 +60,35 @@ describe('CarouselSlide', () => {
     let mounted;
     const Img = CarouselSlide.defaultProps.Img;
     const imgUrl = 'https://example.com/slide1.png';
-    
+
     beforeEach(() => {
       mounted = mount(<Img src={imgUrl} imgHeight={500} />);
     });
 
+    it('renders correctly', () => { 
+      expect(mounted.find('img')).toMatchSnapshot();
+    });
+
     it('should display the img with the right src attr', () => {
-      expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true)
+      expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true);
     });
 
     it('should display the img with the right properties', () => {
       expect(mounted).toHaveStyleRule('width', '100%');
     });
 
-    it('uses imgHeight as the height style property', () => { 
+    it('uses imgHeight as the height style property', () => {
       expect(mounted).toHaveStyleRule('height', '500px');
-      mounted.setProps({imgHeight: 'calc(100vh - 100px)'});
+      mounted.setProps({ imgHeight: 'calc(100vh - 100px)' });
       expect(mounted).toHaveStyleRule('height', 'calc(100vh - 100px)');
     });
 
-    it('should override default styles', () => { 
+    it('should override default styles', () => {
       const newImg = styled(CarouselSlide.defaultProps.Img)`
         width: 80%;
       `;
       wrapper = mount(<CarouselSlide imgUrl={imgUrl} Img={newImg} />);
       expect(wrapper.find(newImg)).toHaveStyleRule('width', '80%');
     });
-
-
-  })
+  });
 });
