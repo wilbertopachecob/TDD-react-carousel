@@ -54,7 +54,7 @@ class Carousel extends React.PureComponent {
         >
           Next
         </CarouselButton>
-        <CarouselSlide {...currentSlide} imgHeight={defaultImageHeigth} />
+        <CarouselSlide imgHeight={defaultImageHeigth} {...currentSlide} />
       </div>
     );
   }
