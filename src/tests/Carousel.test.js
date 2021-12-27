@@ -73,7 +73,7 @@ describe('CarouselBurton', () => {
   });
 
   it('should show the fist image in the array after loaded', () => {
-    const firstSlide = slides[0];
+    const firstSlide = {...slides[0], imgHeight: CarouselSlide.defaultProps.imgHeight};
     const slideProps = wrapper.find(CarouselSlide).props();
 
     expect(slideProps).toEqual(firstSlide);
