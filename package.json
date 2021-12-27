@@ -39,6 +39,7 @@
     "@types/enzyme": "^3.10.10",
     "@types/jest": "^23.3.13",
     "prop-types": "^15.8.0",
-    "react": "^16.4.2"
+    "react": "^16.4.2",
+    "styled-components": "^4.1.1"
   }
 }
