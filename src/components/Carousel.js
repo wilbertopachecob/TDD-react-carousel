@@ -5,12 +5,14 @@ import { PropTypes } from 'prop-types';
 class Carousel extends React.PureComponent {
   static propTypes = {
     defaultImageHeigth: CarouselSlide.propTypes.imgHeight,
+    defaultImg: CarouselSlide.propTypes.Img,
     slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
       .isRequired,
   };
 
   static defaultProps = {
     defaultImageHeigth: CarouselSlide.defaultProps.imgHeight,
+    defaultImg: CarouselSlide.defaultProps.Img,
   }
 
   state = {
@@ -38,7 +40,7 @@ class Carousel extends React.PureComponent {
   }
 
   render() {
-    const { slides, defaultImageHeigth, ...rest } = this.props;
+    const { slides, defaultImageHeigth, defaultImg, ...rest } = this.props;
     const currentSlide = slides[this.state.slideIndex];
     return (
       <div {...rest}>
@@ -54,7 +56,7 @@ class Carousel extends React.PureComponent {
         >
           Next
         </CarouselButton>
-        <CarouselSlide imgHeight={defaultImageHeigth} {...currentSlide} />
+        <CarouselSlide imgHeight={defaultImageHeigth} Img={defaultImg} {...currentSlide} />
       </div>
     );
   }
