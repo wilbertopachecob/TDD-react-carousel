@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import CarouselSlide from '../components/CarouselSlide';
 import React from 'react';
 
@@ -15,14 +15,14 @@ describe('CarouselSlide', () => {
   });
 
   it('should render an <img> and <figcaption> element', () => {
-    expect(wrapper.childAt(0).type()).toBe('img');
+    expect(wrapper.childAt(0).type()).toBe(CarouselSlide.defaultProps.Img);
     expect(wrapper.childAt(1).type()).toBe('figcaption');
   });
 
   it('passes `imgUrl` through to the <img>', () => {
-    const img = wrapper.find('img');
+    const Img = wrapper.find(CarouselSlide.defaultProps.Img);
 
-    expect(img.prop('src')).toBe(imgUrl);
+    expect(Img.prop('src')).toBe(imgUrl);
   });
 
   it('uses `description` and `attribution` as the <figcaption>', () => {
@@ -46,4 +46,12 @@ describe('CarouselSlide', () => {
     expect(wrapper.prop('onClick')).toBe(onClick);
     expect(wrapper.prop('className')).toBe(className);
   });
+
+  describe('Img', () => {
+    const Img = CarouselSlide.defaultProps.Img;
+    const imgUrl = 'https://example.com/slide1.png';
+    const mounted = mount(<Img src={imgUrl} />);
+
+    expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true)
+  })
 });

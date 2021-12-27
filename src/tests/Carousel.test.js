@@ -54,14 +54,14 @@ describe('CarouselBurton', () => {
   it('should decrements `slideIndex` when Prev is clicked', () => {
     wrapper.setState({ slideIndex: 1 });
     wrapper.find("[data-action='prev']").simulate('click');
-    
+
     expect(wrapper.state('slideIndex')).toBe(0);
   });
 
   it('should set `slideIndex` to max value when Prev is clicked and `slideIndex` === 0', () => {
     wrapper.setState({ slideIndex: 0 });
     wrapper.find("[data-action='prev']").simulate('click');
-    
+
     expect(wrapper.state('slideIndex')).toBe(slides.length - 1);
   });
 
@@ -73,7 +73,11 @@ describe('CarouselBurton', () => {
   });
 
   it('should show the fist image in the array after loaded', () => {
-    const firstSlide = {...slides[0], imgHeight: CarouselSlide.defaultProps.imgHeight};
+    const firstSlide = {
+      ...slides[0],
+      imgHeight: CarouselSlide.defaultProps.imgHeight,
+      Img: CarouselSlide.defaultProps.Img,
+    };
     const slideProps = wrapper.find(CarouselSlide).props();
 
     expect(slideProps).toEqual(firstSlide);
