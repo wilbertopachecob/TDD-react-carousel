@@ -53,7 +53,7 @@ describe('CarouselSlide', () => {
     const imgUrl = 'https://example.com/slide1.png';
     
     beforeEach(() => {
-      mounted = mount(<Img src={imgUrl} />);
+      mounted = mount(<Img src={imgUrl} imgHeight={500} />);
     });
 
     it('should display the img with the right src attr', () => {
@@ -64,6 +64,10 @@ describe('CarouselSlide', () => {
       expect(mounted).toHaveStyleRule('width', '100%');
     });
 
-    
+    it('uses imgHeight as the height style property', () => { 
+      expect(mounted).toHaveStyleRule('height', '500px');
+      mounted.setProps({imgHeight: 'calc(100vh - 100px)'});
+      expect(mounted).toHaveStyleRule('height', 'calc(100vh - 100px)');
+    });
   })
 });
