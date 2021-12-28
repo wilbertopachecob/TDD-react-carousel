@@ -10,9 +10,9 @@ export class Carousel extends React.PureComponent {
     defaultImg: CarouselSlide.propTypes.Img,
     slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
       .isRequired,
-    slideIndex: PropTypes.number,
-    slideIndexDecrement: PropTypes.func,
-    slideIndexIncrement: PropTypes.func,
+    slideIndex: PropTypes.number.isRequired,
+    slideIndexDecrement: PropTypes.func.isRequired,
+    slideIndexIncrement: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
