@@ -34,6 +34,8 @@ export class Carousel extends React.PureComponent {
       defaultImageHeigth,
       defaultImg,
       slideIndex,
+      slideIndexDecrement: _slideIndexDecrement,
+      slideIndexIncrement: _slideIndexIncrement,
       ...rest
     } = this.props;
     const currentSlide = slides[slideIndex];
