@@ -2,46 +2,41 @@ import React from 'react';
 import CarouselButton from './CarouselButton';
 import CarouselSlide from './CarouselSlide';
 import { PropTypes } from 'prop-types';
-class Carousel extends React.PureComponent {
+import HasIndex from './HasIndex';
+
+export class Carousel extends React.PureComponent {
   static propTypes = {
     defaultImageHeigth: CarouselSlide.propTypes.imgHeight,
     defaultImg: CarouselSlide.propTypes.Img,
     slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
       .isRequired,
+    slideIndex: PropTypes.number,
+    slideIndexDecrement: PropTypes.func,
+    slideIndexIncrement: PropTypes.func,
   };
 
   static defaultProps = {
     defaultImageHeigth: CarouselSlide.defaultProps.imgHeight,
     defaultImg: CarouselSlide.defaultProps.Img,
-  }
-
-  state = {
-    slideIndex: 0,
   };
 
   handleNextClick() {
-    if (this.state.slideIndex + 1 >= this.props.slides.length) {
-      this.setState(() => ({
-        slideIndex: 0,
-      }));
-      return;
-    }
-    this.setState(({ slideIndex }) => ({ slideIndex: slideIndex + 1 }));
+    this.props.slideIndexIncrement(this.props.slides.length);
   }
 
   handlePrevClick() {
-    if (this.state.slideIndex - 1 < 0) {
-      this.setState(() => ({
-        slideIndex: this.props.slides.length - 1,
-      }));
-      return;
-    }
-    this.setState(({ slideIndex }) => ({ slideIndex: slideIndex - 1 }));
+    this.props.slideIndexDecrement(this.props.slides.length);
   }
 
   render() {
-    const { slides, defaultImageHeigth, defaultImg, ...rest } = this.props;
-    const currentSlide = slides[this.state.slideIndex];
+    const {
+      slides,
+      defaultImageHeigth,
+      defaultImg,
+      slideIndex,
+      ...rest
+    } = this.props;
+    const currentSlide = slides[slideIndex];
     return (
       <div {...rest}>
         <CarouselButton
@@ -56,13 +51,14 @@ class Carousel extends React.PureComponent {
         >
           Next
         </CarouselButton>
-        <CarouselSlide imgHeight={defaultImageHeigth} Img={defaultImg} {...currentSlide} />
+        <CarouselSlide
+          imgHeight={defaultImageHeigth}
+          Img={defaultImg}
+          {...currentSlide}
+        />
       </div>
     );
   }
 }
 
-Carousel.propTypes = {
-  slides: PropTypes.array,
-};
-export default Carousel;
+export default HasIndex(Carousel, 'slideIndex');
