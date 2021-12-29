@@ -40,18 +40,17 @@ const AutoAdvances = (Component, propName, upperBoundPropName) => {
     startTimer() {
       clearInterval(this._timer);
 
-      const { indexIncrement, autoAdvanceDelay } = this.props;
+      const { autoAdvanceDelay, [`${propName}Increment`]: increment } = this.props;
       if (autoAdvanceDelay) {
         this._timer = setInterval(
-          () => indexIncrement(this._upperBound),
+          () => increment(this._upperBound),
           autoAdvanceDelay
         );
       }
-      return;
     }
 
     get _upperBound() {
-      const { upperBound } = this.props;
+      const { [upperBoundPropName]: upperBound } = this.props;
       return Array.isArray(upperBound) ? upperBound.length : upperBound;
     }
 
