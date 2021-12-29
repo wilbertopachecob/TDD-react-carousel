@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { Carousel } from '../src/components/Carousel';
+import Carousel from '../src/components/Carousel';
 
 import slides from '../example/slides';
 
