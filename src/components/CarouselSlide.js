@@ -25,7 +25,7 @@ CarouselSlide.propTypes = {
   Img: PropTypes.elementType,
   imgUrl: PropTypes.string.isRequired,
   imgHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  attribution: PropTypes.string,
+  attribution: PropTypes.node,  
   description: PropTypes.string,
 };
 
