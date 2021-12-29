@@ -40,6 +40,29 @@ describe('Carousel', () => {
     it('passes `slides` down to the core component', () => {
       expect(wrapper.find(CarouselCore).prop('slides')).toEqual(slides);
     });
+
+    it('allows `slideIndex` to be controlled', () => {
+      wrapper = mount(<Carousel slides={slides} slideIndex={1} />);
+      
+      expect(wrapper.find(CarouselCore).prop('slideIndex')).toBe(1);
+      
+      wrapper.setProps({slideIndex: 2})
+
+      expect(wrapper.find(CarouselCore).prop('slideIndex')).toBe(2);
+    });
+
+    it('advances the slide after `autoAdvanceDelay` elapses', () => { 
+      jest.useFakeTimers();
+      const autoAdvanceDelay = 10e3;
+      const mounted = mount(<Carousel slides={slides} autoAdvanceDelay={autoAdvanceDelay}/>) 
+
+      expect(mounted.find(CarouselCore).prop('slideIndex')).toBe(0);
+
+      jest.advanceTimersByTime(autoAdvanceDelay);
+      mounted.update();
+
+      expect(mounted.find(CarouselCore).prop('slideIndex')).toBe(1);
+    });
   });
 
   describe('core component', () => {
