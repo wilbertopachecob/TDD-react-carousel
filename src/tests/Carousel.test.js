@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel, { Carousel as CarouselCore } from '../components/Carousel';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import CarouselButton from '../components/CarouselButton';
 import CarouselSlide from '../components/CarouselSlide';
 
@@ -26,7 +26,7 @@ describe('Carousel', () => {
 
   describe('component with HOC', () => {
     beforeEach(() => {
-      wrapper = shallow(<Carousel slides={slides} />);
+      wrapper = mount(<Carousel slides={slides} />);
     });
 
     it('should be defined', () => {
